@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -45,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     @InjectView( R.id.am_iv )
     ImageView imageView; // the image view
 
+    /* Primitives */
+
+    private boolean goingOut; // boolean to track the direction of the image
+
     /** METHODS */
 
     /** Getters and Setters */
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // 0. super things
         // 1. use the main activity layout
         // 2. inject views
+        // 3. start with the image leaving
 
         // 0. super things
 
@@ -72,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         // 2. inject views
 
         ButterKnife.inject( this );
+
+        // 3. start with the image leaving
+
+        goingOut = true;
 
     } // end onCreate
 
@@ -98,19 +109,64 @@ public class MainActivity extends AppCompatActivity {
     public void click( View view ) {
 
         // 0. initialize the slide that will be used to transition
-        // 1. slide should start from top
+        // 1. randomly choose an edge from which the slide will happen
         // 2. get the content view group
         // 3. begin the transition
-        // 4. finally make the image view invisible
+        // 4. if the image is going out
+        // 4a. make the image view invisible
+        // 4b. set going out to false
+        // 5. if the image is coming in
+        // 5a. make the image view visible
+        // 5b. set going out to true
 
         // 0. initialize the slide that will be used to transition
 
         Slide slide = new Slide();
 
-        // 1. slide should start from top
+        // 1. randomly choose an edge from which the slide will happen
 
-        // set the edge from which the slid items should appear and disappear
-        slide.setSlideEdge( Gravity.TOP );
+        int slideEdge = -1;
+
+        Random randomNumberGenerator = new Random();
+
+        // begin switch to know what to use
+        switch ( randomNumberGenerator.nextInt( 6 ) ) {
+
+            // 0. left
+            // 1. top
+            // 2. right
+            // 3. bottom
+            // 4. start
+            // 5. end
+
+            // 0. left
+
+            case 0: slideEdge = Gravity.LEFT; break;
+
+            // 1. top
+
+            case 1: slideEdge = Gravity.TOP; break;
+
+            // 2. right
+
+            case 2: slideEdge = Gravity.RIGHT; break;
+
+            // 3. bottom
+
+            case 3: slideEdge = Gravity.BOTTOM; break;
+
+            // 4. start
+
+            case 4: slideEdge = Gravity.START; break;
+
+            // 5. end
+
+            case 5: slideEdge = Gravity.END; break;
+
+        } // end switch to know what to use
+
+        // set the edge which the slid items should appear from or disappear to
+        slide.setSlideEdge( slideEdge );
 
         // 2. get the content view group
 
@@ -120,9 +176,35 @@ public class MainActivity extends AppCompatActivity {
 
         TransitionManager.beginDelayedTransition( root, slide );
 
-        // 4. finally make the image view invisible
+        // 4. if the image is going out
 
-        imageView.setVisibility( View.INVISIBLE );
+        // begin if for if we are going out
+        if ( goingOut == true ) {
+
+            // 4a. make the image view invisible
+
+            imageView.setVisibility( View.INVISIBLE );
+
+            // 4b. set going out to false
+
+            goingOut = false;
+
+        } // end if for if we are going out
+
+        // 5. if the image is coming in
+
+        // begin else for when we are coming in
+        else {
+
+            // 5a. make the image view visible
+
+            imageView.setVisibility( View.VISIBLE );
+
+            // 5b. set going out to true
+
+            goingOut = true;
+
+        } // end else for when we are coming in
 
     } // end method click
 
