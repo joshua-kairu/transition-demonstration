@@ -8,7 +8,7 @@ This app shows how the Android slide transition introduced in API 21, Android Lo
 
 ## Version History :package:
 
-**latest**&nbsp;&nbsp;&nbsp;[TransitionDemonstration v1.0.0](https://github.com/joshua-kairu/xml-test/releases/download/v1.0/XML-Test-v1.0.0.apk)&nbsp;&nbsp;&nbsp;Wednesday, June 15, 2016<br/><br/>
+**latest**&nbsp;&nbsp;&nbsp;[TransitionDemonstration v1.0.0](https://github.com/joshua-kairu/transition-demonstration/releases/download/v1.0.0/transitiondemonstration-v1.0.0.apk)&nbsp;&nbsp;&nbsp;Wednesday, June 15, 2016<br/><br/>
 This repo tries its best to follow the [Semantic Versioning](http://semver.org/) guidelines.
 
 ## How To Use :wrench:
